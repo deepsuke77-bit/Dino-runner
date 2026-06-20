@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Dino Runner</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00f0ff">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
     * {
         margin: 0;
@@ -994,6 +998,15 @@ resize();
 game.groundY = H - GROUND_OFFSET;
 dino.y = game.groundY - dino.h;
 hiscoreEl.textContent = Math.floor(game.hiscore / 5);
+
+// ============ PWA SERVICE WORKER ============
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(err => {
+            console.log('Service worker registration failed:', err);
+        });
+    });
+}
 </script>
 </body>
 </html>
